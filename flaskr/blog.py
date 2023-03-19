@@ -25,13 +25,13 @@ def index():
 def create():
     if request.method == 'POST':
         title = request.form['title']
-        body = request.form['body']
         error = None if title else 'Title is required.'
 
         if error:
             flash(error)
         else:
             db = get_db()
+            body = request.form['body']
             db.execute(
                 "INSERT INTO post (title, body, author_id)"
                 " VALUES (?, ?, ?)",
@@ -67,13 +67,13 @@ def update(id):
 
     if request.method == 'POST':
         title = request.form['title']
-        body = request.form['body']
         error = None if title else 'Title is required.'
 
         if error:
             flash(error)
         else:
             db = get_db()
+            body = request.form['body']
             db.execute(
                 "UPDATE post SET title = ?, body = ?"
                 " WHERE id = ?",
